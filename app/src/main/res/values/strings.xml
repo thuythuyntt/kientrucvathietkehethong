@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Sale Management System</string>
+    <string name="nav.header.main.title">shopping</string>
+    <string name="nav.header.main.slogan">Convenient shopping application</string>
+    <string name="menu.main.item.category">Category</string>
+    <string name="menu.main.book">Book</string>
+    <string name="menu.main.clothes">Clothes</string>
+    <string name="menu.main.electronics">Electronics</string>
+    <string name="menu.main.profile">Profile</string>
+    <string name="menu.main.logout">Logout</string>
+    <string name="menu.main.item.account">Account</string>
+    <string name="title_book_navigation_bar">Book</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_clothes_navigation_bar">Clothes</string>
+</resources>
