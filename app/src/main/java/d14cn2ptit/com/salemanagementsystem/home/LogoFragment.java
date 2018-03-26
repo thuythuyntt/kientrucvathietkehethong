@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import d14cn2ptit.com.salemanagementsystem.R;
 import d14cn2ptit.com.salemanagementsystem.activity.MainActivity;
 import d14cn2ptit.com.salemanagementsystem.utils.FragmentUtils;
+import d14cn2ptit.com.salemanagementsystem.utils.StatusbarUtils;
 
 /**
  * Created by thuy on 18/03/2018.
@@ -26,6 +27,7 @@ public class LogoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        StatusbarUtils.darkenStatusBar(getActivity(), R.color.colorTextWhite);
         return inflater.inflate(R.layout.fragment_logo, container, false);
     }
 

@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import d14cn2ptit.com.salemanagementsystem.R;
 import d14cn2ptit.com.salemanagementsystem.home.LogoFragment;
 import d14cn2ptit.com.salemanagementsystem.utils.FragmentUtils;
 import d14cn2ptit.com.salemanagementsystem.utils.KeyboardUtils;
+import d14cn2ptit.com.salemanagementsystem.utils.StatusbarUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         goToScreen(LogoFragment.newInstance());
+        StatusbarUtils.darkenStatusBar(this, R.color.colorHeader);
     }
 
     public <F extends Fragment> void goToScreen(@NonNull F fragment) {
