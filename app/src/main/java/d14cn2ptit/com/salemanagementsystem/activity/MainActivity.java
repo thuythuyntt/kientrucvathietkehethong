@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         StatusbarUtils.darkenStatusBar(this, R.color.colorHeader);
     }
 
+    //abc
+
     public <F extends Fragment> void goToScreen(@NonNull F fragment) {
         goToScreen(FragmentUtils.CONTAINER_MAIN, fragment, FragmentUtils.FLAG_ADD);
     }
