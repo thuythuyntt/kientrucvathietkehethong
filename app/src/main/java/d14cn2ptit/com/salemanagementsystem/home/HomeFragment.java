@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import d14cn2ptit.com.salemanagementsystem.R;
 import d14cn2ptit.com.salemanagementsystem.activity.MainActivity;
+import d14cn2ptit.com.salemanagementsystem.home.book.BookFragment;
 import d14cn2ptit.com.salemanagementsystem.home.clothes.ClothesFragment;
+import d14cn2ptit.com.salemanagementsystem.home.electronics.ElectronicsFragment;
 import d14cn2ptit.com.salemanagementsystem.utils.FragmentUtils;
 
 /**
@@ -84,12 +86,14 @@ public class HomeFragment extends Fragment {
 
                 int id = item.getItemId();
                 if (id == R.id.itemBook) {
-                    Toast.makeText(getActivity(), "Book", Toast.LENGTH_SHORT).show();
+                    ((MainActivity)getActivity()).goToScreen(R.id.relativeContentContainer, BookFragment.newInstance(), FragmentUtils.FLAG_REPLACE);
+                    setHeaderTitle(getResources().getString(R.string.title_book_navigation_bar), true);
                 } else if (id == R.id.itemClothes) {
                     ((MainActivity)getActivity()).goToScreen(R.id.relativeContentContainer, ClothesFragment.newInstance(), FragmentUtils.FLAG_REPLACE);
                     setHeaderTitle(getResources().getString(R.string.title_clothes_navigation_bar), true);
                 } else if (id == R.id.itemElectronics) {
-                    Toast.makeText(getActivity(), "Electrics", Toast.LENGTH_SHORT).show();
+                    ((MainActivity)getActivity()).goToScreen(R.id.relativeContentContainer, ElectronicsFragment.newInstance(), FragmentUtils.FLAG_REPLACE);
+                    setHeaderTitle(getResources().getString(R.string.title_electronics_navigation_bar), true);
                 } else if (id == R.id.itemProfile) {
                     Toast.makeText(getActivity(), "Profile", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.itemLogout) {

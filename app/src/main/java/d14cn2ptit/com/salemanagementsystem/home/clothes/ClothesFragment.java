@@ -45,7 +45,6 @@ public class ClothesFragment extends Fragment {
         List<ClothesData.ClothesType> clothesTypeList = data.getClothesTypeList();
         List<String> clothesHeaderList = data.getClothesHeaderList();
         adapter.setHeaderAndType(clothesTypeList, clothesHeaderList);
-        Log.d(MY_TAG, clothesHeaderList.size() + " " + clothesTypeList.size());
 
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);

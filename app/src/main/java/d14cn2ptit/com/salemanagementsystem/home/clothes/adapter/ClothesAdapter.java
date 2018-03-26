@@ -87,7 +87,6 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void bindHeaderViewHolder(RecyclerView.ViewHolder holder, int position, ViewType viewType) {
         int dataIndex = viewType.getDataIndex();
-        Log.d(MY_TAG,"header " + dataIndex);
         ClothesHeaderViewHolder headerViewHolder = (ClothesHeaderViewHolder) holder;
         headerViewHolder.sectionTitle.setText(clothesHeader.get(dataIndex));
         if (headerViewHolder.callback.isExpanded(position)) {
@@ -101,7 +100,6 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void bindTypeViewHolder(RecyclerView.ViewHolder holder, ViewType viewType) {
         int dataIndex = viewType.getDataIndex();
-        Log.d(MY_TAG,"type " + dataIndex);
         ((ClothesTypeViewHolder) holder).clothesName.setText(clothesTypeList.get(dataIndex).getName());
         ((ClothesTypeViewHolder) holder).desImage.setImageResource(clothesTypeList.get(dataIndex).getImageUrl());
 //        Glide.with(mContext).load(clothesTypeList.get(dataIndex).getImageUrl()).into(((ClothesTypeViewHolder) holder).desImage);
@@ -177,8 +175,8 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             sectionTitle = (TextView) itemView.findViewById(R.id.text_clothes_header);
             this.callback = callback;
-            arrowUp = ContextCompat.getDrawable(itemView.getContext(), android.R.drawable.arrow_up_float);
-            arrowDown = ContextCompat.getDrawable(itemView.getContext(), android.R.drawable.arrow_down_float);
+            arrowUp = ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_keyboard_arrow_up_black_24dp);
+            arrowDown = ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_keyboard_arrow_down_black_24dp);
             itemView.setOnClickListener(this);
         }
 
