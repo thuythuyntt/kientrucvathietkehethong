@@ -38,22 +38,6 @@ public class ClothesFragment extends Fragment {
         return view;
     }
 
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//        MenuInflater menuInflater = getActivity().getMenuInflater();
-//        menuInflater.inflate(R.menu.item_choice, menu);
-//    }
-//
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.delete_item) {
-//            clothesTypeList.remove(ite)
-//        }
-//    }
-
-
-    //chuong anh test
     public void initialization() {
         recycleList = (RecyclerView) view.findViewById(R.id.recycle_list);
         adapter = new ClothesAdapter(new ClothesAdapter.ItemOnLongClick() {

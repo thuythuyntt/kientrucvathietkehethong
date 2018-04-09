@@ -95,8 +95,6 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         }
 
-        //hung code
-
     }
 
     private void bindHeaderViewHolder(RecyclerView.ViewHolder holder, int position, ViewType viewType) {
@@ -116,8 +114,6 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         final int dataIndex = viewType.getDataIndex();
         ((ClothesTypeViewHolder) holder).clothesName.setText(clothesTypeList.get(dataIndex).getName());
         ((ClothesTypeViewHolder) holder).desImage.setImageResource(clothesTypeList.get(dataIndex).getImageUrl());
-//        Glide.with(mContext).load(clothesTypeList.get(dataIndex).getImageUrl()).into(((ClothesTypeViewHolder) holder).desImage);
-        //hung code day
 
         ((ClothesTypeViewHolder) holder).tableRow.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -132,9 +128,6 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     public void onClick(DialogInterface dialog, int item) {
                         //nếu xóa
                         if (item == 1) {
-//                            clothesTypeList.remove(dataIndex);
-//                            notifyItemRemoved(dataIndex);
-//                            notifyItemRangeChanged(dataIndex, clothesTypeList.size());
                             listener.onDelete(dataIndex);
                         }
                         if(item == 0){
