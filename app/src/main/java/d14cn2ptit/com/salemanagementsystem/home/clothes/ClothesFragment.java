@@ -53,6 +53,7 @@ public class ClothesFragment extends Fragment {
 //    }
 
 
+    //chuong anh test
     public void initialization() {
         recycleList = (RecyclerView) view.findViewById(R.id.recycle_list);
         adapter = new ClothesAdapter();
