@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -31,9 +32,19 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<ClothesData.ClothesType> clothesTypeList;
     private List<String> clothesHeader;
     private Context context;
+    private ItemOnLongClick listener;
 
     private SparseArray<ViewType> viewTypes;
     private SparseIntArray headerExpandTracker;
+
+    public ClothesAdapter(ItemOnLongClick listener) {
+        this.listener = listener;
+    }
+
+    public void setClothesTypeList(List<ClothesData.ClothesType> clothesTypeList) {
+        this.clothesTypeList = clothesTypeList;
+        notifyDataSetChanged();
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -121,9 +132,10 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     public void onClick(DialogInterface dialog, int item) {
                         //nếu xóa
                         if (item == 1) {
-                            .remove(dataIndex);
-                            notifyItemRemoved(dataIndex);
-                            notifyItemRangeChanged(dataIndex, clothesTypeList.size());
+//                            clothesTypeList.remove(dataIndex);
+//                            notifyItemRemoved(dataIndex);
+//                            notifyItemRangeChanged(dataIndex, clothesTypeList.size());
+                            listener.onDelete(dataIndex);
                         }
                         if(item == 0){
 
@@ -136,7 +148,6 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         });
     }
 
-    //hung code
     @Override
     public int getItemCount() {
         int count = 0;
@@ -173,18 +184,15 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private int getChildCount(String type) {
-        switch (type) {
-            case "Men's fashion":
-                return 5;
-            case "Women's fashion":
-                return 5;
-            case "Shoes":
-                return 5;
-            case "Bag":
-                return 3;
-            default:
-                return 0;
+        return getCount(type);
+    }
+
+    public int getCount(String type){
+        int count = 0;
+        for(ClothesData.ClothesType t:clothesTypeList){
+            if(t.getType().equals(type)) count++;
         }
+        return count;
     }
 
     public void setHeaderAndType(List<ClothesData.ClothesType> clothesTypeList, List<String> clothesHeaderList, Context context) {
@@ -228,7 +236,13 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             void onHeaderClick(int position);
 
             boolean isExpanded(int position);
+
         }
+    }
+
+    public interface ItemOnLongClick{
+        void onDelete(int position);
+
     }
 
     public class ClothesTypeViewHolder extends RecyclerView.ViewHolder {
