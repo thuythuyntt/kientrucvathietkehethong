@@ -1,27 +1,25 @@
 package d14cn2ptit.com.salemanagementsystem.home.clothes.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import d14cn2ptit.com.salemanagementsystem.R;
 import d14cn2ptit.com.salemanagementsystem.home.clothes.adapter.model.ClothesData;
 import d14cn2ptit.com.salemanagementsystem.home.clothes.adapter.model.ViewType;
-
-import static d14cn2ptit.com.salemanagementsystem.home.clothes.ClothesFragment.MY_TAG;
 
 /**
  * Created by thuy on 18/03/2018.
@@ -32,6 +30,7 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static final int CLOTHES_HEADER = 2;
     private List<ClothesData.ClothesType> clothesTypeList;
     private List<String> clothesHeader;
+    private Context context;
 
     private SparseArray<ViewType> viewTypes;
     private SparseIntArray headerExpandTracker;
@@ -82,7 +81,11 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             bindTypeViewHolder(holder, viewType);
         } else {
             bindHeaderViewHolder(holder, position, viewType);
+
         }
+
+        //hung code
+
     }
 
     private void bindHeaderViewHolder(RecyclerView.ViewHolder holder, int position, ViewType viewType) {
@@ -99,12 +102,41 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void bindTypeViewHolder(RecyclerView.ViewHolder holder, ViewType viewType) {
-        int dataIndex = viewType.getDataIndex();
+        final int dataIndex = viewType.getDataIndex();
         ((ClothesTypeViewHolder) holder).clothesName.setText(clothesTypeList.get(dataIndex).getName());
         ((ClothesTypeViewHolder) holder).desImage.setImageResource(clothesTypeList.get(dataIndex).getImageUrl());
 //        Glide.with(mContext).load(clothesTypeList.get(dataIndex).getImageUrl()).into(((ClothesTypeViewHolder) holder).desImage);
+        //hung code day
+
+        ((ClothesTypeViewHolder) holder).tableRow.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                final CharSequence[] items = {"Edit", "Delete"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                builder.setTitle("Select The Action");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        //nếu xóa
+                        if (item == 1) {
+                            .remove(dataIndex);
+                            notifyItemRemoved(dataIndex);
+                            notifyItemRangeChanged(dataIndex, clothesTypeList.size());
+                        }
+                        if(item == 0){
+
+                        }
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
     }
 
+    //hung code
     @Override
     public int getItemCount() {
         int count = 0;
@@ -155,13 +187,14 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public void setHeaderAndType(List<ClothesData.ClothesType> clothesTypeList, List<String> clothesHeaderList) {
+    public void setHeaderAndType(List<ClothesData.ClothesType> clothesTypeList, List<String> clothesHeaderList, Context context) {
         if (clothesTypeList != null && clothesHeaderList != null) {
             this.clothesTypeList = clothesTypeList;
             this.clothesHeader = clothesHeaderList;
             viewTypes = new SparseArray<>(clothesTypeList.size() + clothesHeaderList.size());
             headerExpandTracker = new SparseIntArray(clothesHeaderList.size());
             notifyDataSetChanged();
+            this.context = context;
         }
     }
 
@@ -193,6 +226,7 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         public interface HeaderViewHolderCallback {
             void onHeaderClick(int position);
+
             boolean isExpanded(int position);
         }
     }
@@ -200,11 +234,13 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class ClothesTypeViewHolder extends RecyclerView.ViewHolder {
         ImageView desImage;
         TextView clothesName;
+        TableRow tableRow;
 
         public ClothesTypeViewHolder(View itemView) {
             super(itemView);
             desImage = (ImageView) itemView.findViewById(R.id.image_clothes);
             clothesName = (TextView) itemView.findViewById(R.id.text_clothes);
+            tableRow = (TableRow) itemView.findViewById(R.id.tbr_item);
         }
     }
 

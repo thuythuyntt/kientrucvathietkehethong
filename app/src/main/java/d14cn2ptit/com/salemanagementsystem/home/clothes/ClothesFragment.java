@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +24,12 @@ public class ClothesFragment extends Fragment {
     View view;
     RecyclerView recycleList;
     ClothesAdapter adapter;
+    List<ClothesData.ClothesType> clothesTypeList;
 
     public static ClothesFragment newInstance() {
         return new ClothesFragment();
     }
-//hung coe
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,18 +38,33 @@ public class ClothesFragment extends Fragment {
         return view;
     }
 
-    public void initialization(){
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater menuInflater = getActivity().getMenuInflater();
+//        menuInflater.inflate(R.menu.item_choice, menu);
+//    }
+//
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.delete_item) {
+//            clothesTypeList.remove(ite)
+//        }
+//    }
+
+
+    public void initialization() {
         recycleList = (RecyclerView) view.findViewById(R.id.recycle_list);
         adapter = new ClothesAdapter();
         ClothesData data = new ClothesData();
-        List<ClothesData.ClothesType> clothesTypeList = data.getClothesTypeList();
+        clothesTypeList = data.getClothesTypeList();
         List<String> clothesHeaderList = data.getClothesHeaderList();
-        adapter.setHeaderAndType(clothesTypeList, clothesHeaderList);
+        adapter.setHeaderAndType(clothesTypeList, clothesHeaderList, getContext());
 
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycleList.setLayoutManager(llm);
-
         recycleList.setAdapter(adapter);
+        registerForContextMenu(recycleList);
     }
 }

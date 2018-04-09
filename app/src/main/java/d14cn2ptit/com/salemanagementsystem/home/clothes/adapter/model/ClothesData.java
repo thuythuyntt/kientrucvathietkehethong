@@ -9,11 +9,11 @@ import d14cn2ptit.com.salemanagementsystem.R;
  * Created by Srijith on 08-10-2017.
  */
 
-public class ClothesData {
+public class ClothesData extends MyItems {
 
     private List<ClothesType> clothesTypeList = new ArrayList<ClothesType>() {
         {
-            add(new ClothesType(0, "Suit", R.drawable.men_suit , "Men's fashion"));
+            add(new ClothesType(0, "Suit", R.drawable.men_suit, "Men's fashion"));
             add(new ClothesType(1, "Shirt", R.drawable.men_shirt, "Men's fashion"));
             add(new ClothesType(2, "Sweater", R.drawable.men_sweater, "Men's fashion"));
             add(new ClothesType(3, "Jacket", R.drawable.men_jacket, "Men's fashion"));
@@ -79,6 +79,17 @@ public class ClothesData {
 
         public String getType() {
             return type;
+        }
+
+        public Object clone() {
+            Object clone = null;
+            try {
+                clone = super.clone();
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+            return clone;
+
         }
     }
 }
