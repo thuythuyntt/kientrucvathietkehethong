@@ -29,7 +29,7 @@ public class ClothesFragment extends Fragment {
     public static ClothesFragment newInstance() {
         return new ClothesFragment();
     }
-
+//hung coe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
