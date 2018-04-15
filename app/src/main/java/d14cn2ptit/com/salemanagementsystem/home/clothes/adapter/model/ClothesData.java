@@ -81,6 +81,18 @@ public class ClothesData extends MyItems {
             return type;
         }
 
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setImageUrl(int imageUrl) {
+            this.imageUrl = imageUrl;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
         public Object clone() {
             Object clone = null;
             try {

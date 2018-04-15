@@ -1,9 +1,14 @@
 package d14cn2ptit.com.salemanagementsystem.home.clothes.adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,12 +20,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import d14cn2ptit.com.salemanagementsystem.R;
+import d14cn2ptit.com.salemanagementsystem.activity.MainActivity;
+import d14cn2ptit.com.salemanagementsystem.home.clothes.ClothesFragment;
 import d14cn2ptit.com.salemanagementsystem.home.clothes.adapter.model.ClothesData;
 import d14cn2ptit.com.salemanagementsystem.home.clothes.adapter.model.ViewType;
+import d14cn2ptit.com.salemanagementsystem.home.edit.EditClothesFragment;
 
 /**
  * Created by thuy on 18/03/2018.
@@ -33,12 +42,14 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<String> clothesHeader;
     private Context context;
     private ItemOnLongClick listener;
-
+    FragmentActivity fragmentActivity;
+    ClothesFragment f;
     private SparseArray<ViewType> viewTypes;
     private SparseIntArray headerExpandTracker;
 
-    public ClothesAdapter(ItemOnLongClick listener) {
+    public ClothesAdapter(ClothesFragment f, ItemOnLongClick listener) {
         this.listener = listener;
+        this.f = f;
     }
 
     public void setClothesTypeList(List<ClothesData.ClothesType> clothesTypeList) {
@@ -130,8 +141,21 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         if (item == 1) {
                             listener.onDelete(dataIndex);
                         }
-                        if(item == 0){
+                        if (item == 0) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("editname", clothesTypeList.get(dataIndex).getName());
+                            bundle.putString("edittype", clothesTypeList.get(dataIndex).getType());
+                            bundle.putInt("editimage", clothesTypeList.get(dataIndex).getImageUrl());
+                            bundle.putInt("editpos", dataIndex);
 
+                            EditClothesFragment editClothesFragment = new EditClothesFragment();
+                            editClothesFragment.setArguments(bundle);
+
+                            fragmentActivity = (FragmentActivity) context;
+                            android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.relativeContentContainer, editClothesFragment).commit();
+                            fragmentManager.beginTransaction().remove(f).commit();
+//                            ((MainActivity)context).goToScreen(editClothesFragment);
                         }
                     }
                 });
@@ -140,6 +164,7 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -180,10 +205,10 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return getCount(type);
     }
 
-    public int getCount(String type){
+    public int getCount(String type) {
         int count = 0;
-        for(ClothesData.ClothesType t:clothesTypeList){
-            if(t.getType().equals(type)) count++;
+        for (ClothesData.ClothesType t : clothesTypeList) {
+            if (t.getType().equals(type)) count++;
         }
         return count;
     }
@@ -233,7 +258,7 @@ public class ClothesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public interface ItemOnLongClick{
+    public interface ItemOnLongClick {
         void onDelete(int position);
 
     }

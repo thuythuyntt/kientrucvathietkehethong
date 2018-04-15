@@ -40,7 +40,7 @@ public class ClothesFragment extends Fragment {
 
     public void initialization() {
         recycleList = (RecyclerView) view.findViewById(R.id.recycle_list);
-        adapter = new ClothesAdapter(new ClothesAdapter.ItemOnLongClick() {
+        adapter = new ClothesAdapter(this, new ClothesAdapter.ItemOnLongClick() {
             @Override
             public void onDelete(int position) {
                 clothesTypeList.remove(position);
@@ -49,6 +49,14 @@ public class ClothesFragment extends Fragment {
         });
         ClothesData data = new ClothesData();
         clothesTypeList = data.getClothesTypeList();
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            clothesTypeList.get(getArguments().getInt("updatenumbuer"))
+                    .setName(getArguments().getString("updatename"));
+            clothesTypeList.get(getArguments().getInt("updatenumbuer"))
+                    .setType(getArguments().getString("updatetype"));
+        }
         List<String> clothesHeaderList = data.getClothesHeaderList();
         adapter.setHeaderAndType(clothesTypeList, clothesHeaderList, getContext());
 

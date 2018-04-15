@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         goToScreen(LogoFragment.newInstance());
         StatusbarUtils.darkenStatusBar(this, R.color.colorHeader);
+
     }
 
     //abc
