@@ -32,7 +32,7 @@ import d14cn2ptit.com.salemanagementsystem.utils.FragmentUtils;
  */
 
 public class HomeFragment extends Fragment {
-
+//gyqgw
     ImageView imageHomeMenu;
     TextView textTitle;
     ImageView imageRight;

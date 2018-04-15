@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sale Management System.iml" filepath="$PROJECT_DIR$/Sale Management System.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KTTKPM.iml" filepath="$PROJECT_DIR$/KTTKPM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\thanh\Desktop\Ki 8\Kien truc va thiet ke phan mem\Sale Management System\kientruc.iml" filepath="C:\Users\thanh\Desktop\Ki 8\Kien truc va thiet ke phan mem\Sale Management System\kientruc.iml" />
     </modules>
   </component>
 </project>
